@@ -1,5 +1,5 @@
 # Multi_File_Search_PS
 
-A powershell script that is based on Brien Posey's multi-file search tool script located on ITPro Today that has been expanded upon.
+A PowerShell script based on Brien Posey's ITPro Today multi-file search tool script.
 
-Orginal URL: https://www.itprotoday.com/powershell/how-i-built-my-own-powershell-multi-file-search-tool 
+Original URL: https://www.itprotoday.com/powershell/how-i-built-my-own-powershell-multi-file-search-tool 
