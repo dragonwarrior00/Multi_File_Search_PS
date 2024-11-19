@@ -1,8 +1,8 @@
 <#
 .SYNOPSIS
-    Perform a syntax search within same directory as powershell script
+    Perform a syntax search within the same directory as the PowerShell script
 .DESCRIPTION
-    This will perform a syntax search and highlight the syntax within files in same directory as the powershell script and sub-folders of the same directory. Not only a single word but full sentencing and special characters
+    This will perform a syntax search and highlight the syntax within files in the same directory as the PowerShell script and sub-folders of the same directory. Not only a single word but full sentencing and special characters
     are searchable. The script also includes the ability to have line numbers appear and to word wrap search results. The script will also display the full path of the selected file, which is selectable. Additionally,
     pressing the Enter key or clicking the Submit button will perform the search. The Clear button will only clear search syntax and search results.
 .NOTES
@@ -11,27 +11,27 @@
 
     Modify author: Josh Lamberth
 
-    Update (11/15/2024) - The following changes as been added:
+    Update (11/15/2024) - The following changes have been added:
         - Format of text including wording, size, and font style
         - Features relocation, size, and color
         - Non-adjustable form border style
-        - Added readonly textbox to display directory path of selected file to allow selectable path
+        - Added read-only textbox to display the directory path of the selected file to allow a selectable path
         - Hidden left panel when not searching
         - Hidden right panel when not searching
-        - Dynamic left panel display that will be scrollable when hit max height of form. No search result will display one item size blank result
-        - Dynamic right panel display that appears when file is selected from search. Size adjust based on size of file content. Scrollable horizontal and vertical bars when hit max height and width
-        - Added check option to display line numbers. If a search file is already selected, will re-select file to display line numbers
-        - Added check option to word wrap right panel. If a search file is already selected, will re-select file to display results word wrapped
-        - Added Clear button to clear search and reset left and right panels
-        - Added the ability to use Enter key to perform search
-        - Removed notification audio when Enter key is used to perform search
-        - Set default search directory as the same as script directory
+        - Dynamic left panel display. That will be scrollable when hitting the max height of the form. No search result will display one item size blank result
+        - Dynamic right panel display when a file is selected from the search result. The panel size will adjust based on the selected file content
+        - Added a check option to display line numbers. If a search file is already selected, will re-select the file to display line numbers
+        - Added a check option to word wrap the right panel. If a search file is already selected, will re-select the file to display results word-wrapped
+        - Added a Clear button to clear search and reset left and right panels
+        - Added the ability to use the Enter key to perform a search
+        - Removed notification audio when the Enter key is used to perform a search
+        - Set the default search directory as the same as the script directory
         - Trim start and end whitespace of searching syntax
         - Added ability to exclude file types (ie. exe, msi, etc..)
         - Dynamic set X location of Clear button, Exit button, Word Wrap checkbox, and Line Numbers checkbox
-        - Set min height of left panel to be one item result
-        - Set max size of left panel to be set listbox width and dynamic form height
-        - Set max size of right panel to be dynamic of listbox width and form height
+        - Set the minimal height of the left panel to be one item
+        - Set the max size of the left panel to be set listbox width and dynamic form height
+        - Set the max size of the right panel to be dynamic of listbox width and form height
         - Removed -RAW syntax from Get-Content and added -Join syntax
 
 .LINK
@@ -46,7 +46,7 @@ Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
 
 Function Clear-Results {
-    #Clear any results from previous searches and default height
+    #Clear any results from previous searches and reset to default height
     [Void] $FileListBox.Items.Clear()
     $FileListBox.Visible = $false
     $FileListBox.Height = $ListBoxHeight
@@ -74,7 +74,7 @@ Function Get-SelectedItem {
     If ($null -ne $FileListBox.SelectedItem){
         $FileContentsTextBox.Visible = $false
 
-        # Re-select the left panel selected file to re-display right panel results
+        # Re-select the left panel selected file and re-display content on the right panel
         $SelectedIndex = $FileListBox.SelectedIndex
         $FileListbox.SelectedIndex = "-1"
         $FileListBox.SelectedIndex = $SelectedIndex
@@ -114,7 +114,7 @@ $FileContentsLabel.AutoSize = $true
 $FileContentsLabel.Location = New-Object Drawing.Point(345, 240)
 $FileContentsLabel.ForeColor = [System.Drawing.Color]::Black
 
-# Create the label to display full path
+# Create the label to display the full path
 $FilePathLabel = New-Object Windows.Forms.Label
 $FilePathLabel.Text = "File Directory Path:"
 $FilePathLabel.Font = New-Object System.Drawing.Font('Arial',14,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Italic -bor [System.Drawing.FontStyle]::Underline))
@@ -163,7 +163,7 @@ $SubmitButton.Add_Click({
 
             IF ($SafeInput -ne ""){
 
-                # Exclude any file types from search (ie. app installing files)
+                # Exclude file types from search results (ie. app installing files)
                 $ExcludeFileTypes = @("*.exe", "*.msi", "*.pdb", "*.dll")
 
                 # Get a list of all files and their path
@@ -285,7 +285,7 @@ $FileContentsTextBox.Add_ContentsResized({
     $FileContentsTextBox.Width = $newWidth
 })
 
-# Display the selected file full directory path
+# Display the selected file's full directory path
 $FilePathTextBox = New-Object System.Windows.Forms.TextBox
 $FilePathTextBox.Font = New-Object Drawing.Font("Arial", 14, [System.Drawing.FontStyle]::Italic)
 $FilePathTextBox.ReadOnly = $true
