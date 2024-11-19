@@ -32,7 +32,7 @@
         - Set the minimal height of the left panel to be one item
         - Set the max size of the left panel to be set listbox width and dynamic form height
         - Set the max size of the right panel to be dynamic of listbox width and form height
-        - Removed -RAW syntax from Get-Content and added -Join syntax
+        - Removed -RAW syntax from Get-Content and added -Join syntax to allow syntax highlighting
 
 .LINK
 
